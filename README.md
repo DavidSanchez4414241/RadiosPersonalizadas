@@ -30,4 +30,7 @@
 Puedes descargar el APK compilado directamente desde la sección de **Releases** o clonar este repositorio para abrir el proyecto en **Android Studio** y compilarlo por tu cuenta. 
 
 Este proyecto es totalmente educativo y de código abierto. ¡Las contribuciones y sugerencias son bienvenidas!
-<img width="7683" height="5349" alt="CapturasRadio" src="https://github.com/user-attachments/assets/4a2a0331-8e3d-46d1-b0df-4b9abcf20eb3" />
+
+---
+Estas capturas definen bien la aplicación:
+<img width="6683" height="4349" alt="CapturasRadio" src="https://github.com/user-attachments/assets/4a2a0331-8e3d-46d1-b0df-4b9abcf20eb3" />
