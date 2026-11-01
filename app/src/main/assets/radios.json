@@ -1,0 +1,9 @@
+[
+  {
+    "city": "Ciudad",
+    "frequency": "00.0 FM",
+    "name": "Station Name",
+    "streamUrl": "http://www.example.net:9036/stream",
+    "imageUrl": "https://www.example.org/wp-content/uploads/logo_1280.jpg"
+  }
+]
