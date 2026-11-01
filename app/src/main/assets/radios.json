@@ -1,0 +1,42 @@
+[
+  {
+    "city": "Mazarrón, Región de Murcia",
+    "frequency": "91.2 FM",
+    "name": "QUE ARTE RADIO LA FLAMENQUITA",
+    "streamUrl": "http://sonic.mediatelekom.net:9036/stream",
+    "imageUrl": "https://www.mazarronnoticias.org/wp-content/uploads/2020/03/quearte_logo_1280.jpg"
+  },
+  {
+    "city": "Mazarrón, Región de Murcia",
+    "frequency": "94.1 FM",
+    "name": "RADIO COSTA CÁLIDA",
+    "streamUrl": "http://sonic.mediatelekom.net:9032/stream",
+    "imageUrl": "https://www.mazarronnoticias.org/wp-content/uploads/2020/03/radiocc_logo_1280.jpg"
+  },
+  {
+    "city": "Mazarrón, Región de Murcia",
+    "frequency": "97.3 FM",
+    "name": "SIE7E RADIO",
+    "streamUrl": "https://stream.sieteradio.com/listen/sieteweb/stream",
+    "imageUrl": "https://sieteradio.com/wp-content/uploads/2025/06/BLANCO-1170x639.png"
+  },
+  {
+    "city": "Mazarrón, Región de Murcia",
+    "frequency": "95.8 FM",
+    "name": "LA VOZ DE MAZARRÓN",
+    "streamUrl": "https://mediastreamm.com:8366/stream",
+    "imageUrl": "https://liveonlineradio.net/wp-content/uploads/2018/05/La-Voz-de-Mazarron.jpg"
+  },
+  {
+    "city": "Cartagena, Región de Murcia",
+    "name": "CADENA DIAL CARTAGENA",
+    "streamUrl": "https://playerservices.streamtheworld.com/api/livestream-redirect/CADENADIAL.mp3",
+    "imageUrl": "https://www.cadenadial.com/wp-content/uploads/2019/09/Avatar_Dial.png"
+  },
+  {
+    "city": "Cartagena, Región de Murcia",
+    "name": "LOS 40 CARTAGENA",
+    "streamUrl": "https://25453.live.streamtheworld.com/LOS40_CARTAGENAAAC.aac",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/80/Los_40.svg"
+  }
+]
