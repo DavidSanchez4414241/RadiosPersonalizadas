@@ -1,6 +1,6 @@
 # 📻 Custom Radio Player
 
-**Custom Radio Player** es una aplicación para Android de código abierto (*open source*) y totalmente libre de anuncios, diseñada para que puedas gestionar y escuchar tus emisoras de radio favoritas de forma totalmente personalizada.
+**Custom Radio Player** es una aplicación para Android totalmente libre de anuncios, diseñada para que puedas gestionar y escuchar tus emisoras de radio favoritas de forma totalmente personalizada.
 
 ## ✨ Características Principales
 
@@ -28,8 +28,6 @@
 ## 🛠️ Compilación y Contribución
 
 Puedes descargar el APK compilado directamente desde la sección de **Releases** o clonar este repositorio para abrir el proyecto en **Android Studio** y compilarlo por tu cuenta. 
-
-Este proyecto es totalmente educativo y de código abierto. ¡Las contribuciones y sugerencias son bienvenidas!
 
 ---
 Estas capturas definen bien la aplicación:
