@@ -1,4 +1,4 @@
-package com.example.radioslocales
+package com.deivela.radioslocales
 
 import android.app.PendingIntent
 import android.content.Intent
@@ -25,7 +25,7 @@ import com.google.common.util.concurrent.ListenableFuture
 class PlaybackService : MediaSessionService() {
 
     companion object {
-        const val ACTION_SET_TIMER = "com.example.radioslocales.SET_TIMER"
+        const val ACTION_SET_TIMER = "com.deivela.radioslocales.SET_TIMER"
         const val EXTRA_MINUTES = "minutes"
         const val EXTRA_TIMER_END = "timer_end"
     }
@@ -89,8 +89,11 @@ class PlaybackService : MediaSessionService() {
     override fun onCreate() {
         super.onCreate()
 
-        // Muchas URLs de radio redirigen de http a https (o al revés): lo permitimos
+        // Identificador nativo para aplicaciones móviles Android (evita exigir pings de sesión web en StreamTheWorld / Triton Digital)
+        val userAgent = "RadiosLocales/1.1 (Android; Mobile)"
+
         val httpFactory = DefaultHttpDataSource.Factory()
+            .setUserAgent(userAgent)
             .setAllowCrossProtocolRedirects(true)
             .setConnectTimeoutMs(15_000)
             .setReadTimeoutMs(15_000)
@@ -109,6 +112,8 @@ class PlaybackService : MediaSessionService() {
             .setHandleAudioBecomingNoisy(true)      // pausa si desconectas los auriculares
             .setWakeMode(C.WAKE_MODE_NETWORK)       // mantiene la conexión con la pantalla apagada
             .build()
+
+        player.pauseAtEndOfMediaItems = true
 
         // De la última emisora se pasa a la primera y al revés
         player.repeatMode = Player.REPEAT_MODE_ALL

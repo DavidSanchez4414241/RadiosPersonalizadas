@@ -1,4 +1,4 @@
-package com.example.radioslocales
+package com.deivela.radioslocales
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement

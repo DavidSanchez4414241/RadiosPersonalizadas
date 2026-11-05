@@ -1,12 +1,20 @@
-# Add project specific R8 rules here.
-# AGP will combine all keep rule files in src/main/keepRules to pass to R8
-#
-# For more details, see
-#   https://d.android.com/r/tools/r8/keep-rules
+# Reglas de R8 para RadiosLocales
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Preservar el modelo de datos para parseo JSON
+-keep class com.deivela.radioslocales.Radio { *; }
+-keep class com.deivela.radioslocales.RadioStore { *; }
+-keep class com.deivela.radioslocales.PlaybackService { *; }
+-keep class com.deivela.radioslocales.MainActivity { *; }
+
+# Media3 ExoPlayer: DefaultMediaSourceFactory utiliza reflexión para instanciar HlsMediaSource$Factory.
+# Sin estas reglas, R8 elimina la extensión de HLS en compilaciones Release.
+-keep class androidx.media3.exoplayer.hls.** { *; }
+-keep interface androidx.media3.exoplayer.hls.** { *; }
+-keep class androidx.media3.exoplayer.source.** { *; }
+-keep class androidx.media3.session.** { *; }
+-keep class androidx.media3.datasource.** { *; }
+-keep class androidx.media3.common.** { *; }
+
+# Coil 3: Carga de imágenes en red
+-keep class coil3.** { *; }
+-keep interface coil3.** { *; }

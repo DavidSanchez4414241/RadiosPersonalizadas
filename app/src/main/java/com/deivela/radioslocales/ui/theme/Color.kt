@@ -1,4 +1,4 @@
-package com.example.radioslocales.ui.theme
+package com.deivela.radioslocales.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

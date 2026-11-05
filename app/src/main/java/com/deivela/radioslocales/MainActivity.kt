@@ -1,4 +1,4 @@
-package com.example.radioslocales
+package com.deivela.radioslocales
 
 import android.Manifest
 import android.content.ComponentName
@@ -58,7 +58,7 @@ import coil3.request.ImageRequest
 import kotlinx.coroutines.delay
 
 private const val TAG = "RadiosLocales"
-private const val IMAGE_USER_AGENT = "RadiosLocales/1.0 (Android; reproductor de radio personalizado)"
+private const val IMAGE_USER_AGENT = "RadiosLocales/1.1 (Android; reproductor de radio personalizado)"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -179,7 +179,14 @@ fun RadiosApp() {
                 override fun onEvents(player: Player, events: Player.Events) = sync()
                 override fun onPlayerError(error: PlaybackException) {
                     Log.e(TAG, "Error de reproducción: ${error.errorCodeName}", error)
-                    errorMsg = "No se pudo reproducir (${error.errorCodeName})"
+                    val msg = when (error.errorCode) {
+                        PlaybackException.ERROR_CODE_IO_CLEARTEXT_NOT_PERMITTED -> "Tráfico HTTP no permitido"
+                        PlaybackException.ERROR_CODE_IO_BAD_HTTP_STATUS -> "Servidor no disponible (HTTP error)"
+                        PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED -> "Sin conexión a internet"
+                        else -> "No se pudo reproducir (${error.errorCodeName})"
+                    }
+                    errorMsg = msg
+                    c.stop()
                 }
             }
             c.addListener(listener)
@@ -203,6 +210,7 @@ fun RadiosApp() {
         val c = controller ?: return
         if (index !in radios.indices) return
         errorMsg = null
+        c.stop()
         c.setMediaItems(radios.map { it.toMediaItem() }, index, C.TIME_UNSET)
         c.prepare()
         c.play()

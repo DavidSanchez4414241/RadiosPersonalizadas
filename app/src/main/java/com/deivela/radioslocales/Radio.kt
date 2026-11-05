@@ -1,9 +1,10 @@
-package com.example.radioslocales
+package com.deivela.radioslocales
 
 import android.content.Context
 import android.net.Uri
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
+import androidx.media3.common.MimeTypes
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -20,20 +21,42 @@ data class Radio(
         get() = if (frequency.isBlank()) name else "$frequency / $name"
 }
 
+/** Limpia URLs de espacios y de caracteres accidentales al inicio/final como paréntesis o comillas */
+fun sanitizeUrl(url: String): String {
+    var cleaned = url.trim()
+    while (cleaned.startsWith("(") || cleaned.startsWith("\"") || cleaned.startsWith("'")) {
+        cleaned = cleaned.substring(1).trim()
+    }
+    while (cleaned.endsWith(")") || cleaned.endsWith("\"") || cleaned.endsWith("'")) {
+        cleaned = cleaned.substring(0, cleaned.length - 1).trim()
+    }
+    return cleaned
+}
+
 /** Convierte una emisora en el elemento que entiende el reproductor (título, subtítulo y logo). */
 fun Radio.toMediaItem(): MediaItem {
+    val cleanStreamUrl = sanitizeUrl(streamUrl)
+    val cleanImageUrl = sanitizeUrl(imageUrl)
+
     val metadata = MediaMetadata.Builder()
         .setTitle(displayName)
         .setArtist(city)
-        .setArtworkUri(if (imageUrl.isBlank()) null else Uri.parse(imageUrl))
+        .setArtworkUri(if (cleanImageUrl.isBlank()) null else Uri.parse(cleanImageUrl))
         .setIsPlayable(true)
         .setIsBrowsable(false)
         .build()
-    return MediaItem.Builder()
-        .setMediaId(streamUrl)
-        .setUri(streamUrl)
+
+    val builder = MediaItem.Builder()
+        .setMediaId(cleanStreamUrl)
+        .setUri(cleanStreamUrl)
         .setMediaMetadata(metadata)
-        .build()
+
+    val lowerUrl = cleanStreamUrl.lowercase()
+    if (lowerUrl.contains(".m3u8") || lowerUrl.contains(".m3u")) {
+        builder.setMimeType(MimeTypes.APPLICATION_M3U8)
+    }
+
+    return builder.build()
 }
 
 private fun JSONObject.str(key: String): String =
@@ -49,7 +72,7 @@ object RadioStore {
         for (i in 0 until arr.length()) {
             val o = arr.optJSONObject(i) ?: continue
             val name = o.str("name")
-            val url = o.str("streamUrl")
+            val url = sanitizeUrl(o.str("streamUrl"))
             if (name.isBlank() || url.isBlank()) continue
             result.add(
                 Radio(
@@ -57,7 +80,7 @@ object RadioStore {
                     streamUrl = url,
                     city = o.str("city"),
                     frequency = o.str("frequency"),
-                    imageUrl = o.str("imageUrl")
+                    imageUrl = sanitizeUrl(o.str("imageUrl"))
                 )
             )
         }
